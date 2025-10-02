@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   install:
     commands:
@@ -11,6 +12,7 @@ phases:
       - echo "Preparing artifact"
       - mkdir -p artifact
       - cp -r * artifact/ || true
+
 artifacts:
   files:
     - '**/*'
