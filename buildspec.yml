@@ -3,19 +3,15 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing dependencies..."
-      - npm install
+      - echo "Installing dependencies"
+      - if [ -f package.json ]; then npm ci || npm install; fi
   build:
     commands:
-      - echo "Build started on `date`"
-      - npm run build || echo "No build script found, continuing..."
-      - echo "Preparing artifact folder..."
+      - echo "Running tests"
+      - if [ -f package.json ]; then npm test; fi
+      - echo "Preparing artifact"
       - mkdir -p artifact
-      - cp -r * artifact/
-  post_build:
-    commands:
-      - echo "Build completed successfully on `date`"
-
+      - cp -r * artifact/ || true
 artifacts:
   files:
     - '**/*'
